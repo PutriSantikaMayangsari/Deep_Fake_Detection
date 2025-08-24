@@ -1,0 +1,40 @@
+Ini rangkuman yang coba aku kumpulkan dari paper [[1]](#ref1). Hanya untuk catatan sementara saja, nanti dihapus. Intinya ini mencoba melakukan perbandingan berbagai macam teknik untuk mendeteksi DeepFake. Ada beberapa dataset yang di-highlight oleh paper tersebut, aku akan mencoba kasih link jika datasetnya publik.\
+Dataset yang dipakai dalam riset DeepFake: 
+1. DeepFaceLab Dataset (Dalam Paper [[2]](#ref2), DeepFaceLab pakai berbagai macam dataset. Ya dataset yang ada di bawah ini) 
+2. CelebA Dataset [Link](https://mmlab.ie.cuhk.edu.hk/projects/CelebA.html) 
+3. FaceForensics++ [Original perlu izin dulu](https://github.com/ondyari/FaceForensics), [Versi Kaggle](https://www.kaggle.com/datasets/xdxd003/ff-c23) 
+4. DFDC Dataset [Original](https://ai.meta.com/datasets/dfdc/), [Varsi Kaggle](https://www.kaggle.com/competitions/deepfake-detection-challenge/data) 
+5. UADFV [Kaggle](https://www.kaggle.com/datasets/adityakeshri9234/uadfv-dataset) 
+
+Perbandingan Metode: 
+| Study                           | Features                   | Classification Methods  | Databases                                                                      | Best Performance         |
+|---------------------------------|----------------------------|-------------------------|--------------------------------------------------------------------------------|--------------------------|
+| Convolutional LSTM              | Image Temporal Information | CNN + RNN               | own                                                                            | Acc. ≈ 97.1              |
+| XceptionNet                     | Image-related Steganalysis | CNN                     | FF++ (DeepFake, LQ)<br>FF++ (DeepFake, HQ)<br>FF++ (DeepFake, RAW)<br>Celeb-DF | Acc. ≈ 94.0%<br>Acc. ≈ 98.0%<br>Acc. ≈ 100.0%<br>Acc. ≈ 65.5% |
+| MesoNet                         | Mesoscopic Level           | CNN                     | FF++ (DeepFake, LQ)<br>FF++ (DeepFake, HQ)<br>FF++ (DeepFake, RAW)<br>Celeb-DF | Acc. ≈ 90.0%<br>Acc. ≈ 94.4%<br>Acc. ≈ 98.06%<br>Acc. ≈ 54.8% |
+| Capsule                         | Image-related              | Capsule Network         | DeepFakeTIMIT (LQ)<br>DeepFakeTIMIT (HQ)<br>FF++ (DeepFake)<br>Celeb-DF        | AUC ≈ 78.4%<br>AUC ≈ 74.4%<br>AUC ≈ 92.17%<br>AUC ≈ 57.5% |
+| Face Warping Artifacts          | Image Warping Artifacts    | CNN                     | UADFV<br>DeepFakeTIMIT (LQ)<br>DeepFakeTIMIT (HQ)                              | AUC ≈ 97.4%<br>AUC ≈ 99.9%<br>AUC ≈ 93.2% |
+| Two Stream                      | Image related Stageanalysis| CNN, SVM                | UADFV<br>DeepFakeTIMIT (LQ)<br>DeepFakeTIMIT (HQ)                              | AUC ≈ 85.1%<br>AUC ≈ 83.5%<br>AUC ≈ 73.5% |
+| Recurrent Convolutional Network | Image+Temporal Information | CNN + RNN               | FF++ (DeepFake, LQ)                                                            | Acc. ≈ 96.9%             |
+| Visual Artifacts                | Visual Artifacts           | Logistic Regression, MLP| own                                                                            | AUC ≈ 85.1%              |
+
+Coba cek 3 akurasi tertinggi:
+1. XceptionNet: FF++(DeepFake,RAW), 100%, [Paper XceptionNet](https://arxiv.org/pdf/1610.02357), [Paper](https://openaccess.thecvf.com/content_ICCV_2019/papers/Rossler_FaceForensics_Learning_to_Detect_Manipulated_Facial_Images_ICCV_2019_paper.pdf), [GitHub](https://github.com/ondyari/FaceForensics)
+2. Face Warping Artifacts: DeepFakeTIMIT(LQ), 99.9% [Paper](https://arxiv.org/pdf/1811.00656), [GitHub](https://github.com/yuezunli/CVPRW2019_Face_Artifacts)
+3. MesoNet: FF++(DeepFake,RAW), 98%, [Paper](https://hal.science/hal-01867298/file/afchar_WIFS_2018.pdf), [GitHub](https://github.com/DariusAf/MesoNet)
+
+Mungkin Benchmark ini juga bisa membantu [[3]](#ref3).
+
+# Reference Paper
+
+<a id="ref1"/>
+
+[1] [Comparative study of deep learning techniques for DeepFake video detection](https://www.sciencedirect.com/science/article/pii/S2405959524001218?via%3Dihub)
+
+<a id="ref2"/>
+
+[2] [DeepFaceLab: Integrated, flexible and extensible face-swapping framework](https://arxiv.org/pdf/2005.05535)
+
+<a if="ref3"/>
+
+[3] [FaceForensics Benchmark](https://kaldir.vc.in.tum.de/faceforensics_benchmark/)
