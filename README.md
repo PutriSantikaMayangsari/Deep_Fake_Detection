@@ -1,7 +1,7 @@
 ## Paper buat proposal nanti
 
 [1] [A Benchmark of Facial Recognition Pipelines and Co-Usability Performances of Modules](https://dergipark.org.tr/tr/download/article-file/3573195)\
-Ini menjelaskan perbandingan facedetector seperti MTCNN, RetinaFace, OpenCV DNN, dan sebagainya. RetinaFace punya performa lebih bagus, jadi kita pakai ini.
+Ini menjelaskan perbandingan facedetector seperti MTCNN, RetinaFace, OpenCV DNN, dan sebagainya. RetinaFace punya performa lebih bagus, jadi kita pakai ini. (paper kebanyakan pakai MTCNN, tapi kalau dilihat dari paper itu, MTCNN sama RetinaFace performanya beda tipis)
 
 ## Rangkuman mengenai performa Model Klasifikasi DeepFake dan Dataset
 
