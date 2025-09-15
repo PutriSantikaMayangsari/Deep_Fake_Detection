@@ -4,7 +4,7 @@
 Ini menjelaskan perbandingan facedetector seperti MTCNN, RetinaFace, OpenCV DNN, dan sebagainya. RetinaFace dan MTCNN punya performa bagus, jadi kita pakai antara keduanya (paper kebanyakan pakai MTCNN, tapi kalau dilihat dari paper itu, MTCNN sama RetinaFace performanya beda tipis).
 
 [2] [Quick Classification of Xception And Resnet-50 Models on Deepfake Video Using Local Binary Pattern](https://ieeexplore.ieee.org/document/9742852)\
-Di sini aku nyoba 2 implementasi face detektor (MTCNN dan RetinaFace), ternyata hasilnya sama bagusnya. Jadi sepertinya aku pikir mending pake MTCNN aja, karena kebanyakan paper pake itu.
+Di sini aku nyoba 2 implementasi face detektor ([MTCNN](https://github.com/PutriSantikaMayangsari/Deep_Fake_Detection/blob/main/MTCNN_LBP.ipynb) dan RetinaFace), ternyata hasilnya sama bagusnya. Jadi sepertinya aku pikir mending pake MTCNN aja, karena kebanyakan paper pake itu.
 
 ## Rangkuman mengenai performa Model Klasifikasi DeepFake dan Dataset
 
