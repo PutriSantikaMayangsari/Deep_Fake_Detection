@@ -1,7 +1,10 @@
 ## Paper buat proposal nanti
 
 [1] [A Benchmark of Facial Recognition Pipelines and Co-Usability Performances of Modules](https://dergipark.org.tr/tr/download/article-file/3573195)\
-Ini menjelaskan perbandingan facedetector seperti MTCNN, RetinaFace, OpenCV DNN, dan sebagainya. RetinaFace punya performa lebih bagus, jadi kita pakai ini. (paper kebanyakan pakai MTCNN, tapi kalau dilihat dari paper itu, MTCNN sama RetinaFace performanya beda tipis)
+Ini menjelaskan perbandingan facedetector seperti MTCNN, RetinaFace, OpenCV DNN, dan sebagainya. RetinaFace dan MTCNN punya performa bagus, jadi kita pakai antara keduanya (paper kebanyakan pakai MTCNN, tapi kalau dilihat dari paper itu, MTCNN sama RetinaFace performanya beda tipis).
+
+[2] [Quick Classification of Xception And Resnet-50 Models on Deepfake Video Using Local Binary Pattern](https://ieeexplore.ieee.org/document/9742852)\
+Di sini aku nyoba 2 implementasi face detektor (MTCNN dan RetinaFace), ternyata hasilnya sama bagusnya. Jadi sepertinya aku pikir mending pake MTCNN aja, karena kebanyakan paper pake itu.
 
 ## Rangkuman mengenai performa Model Klasifikasi DeepFake dan Dataset
 
