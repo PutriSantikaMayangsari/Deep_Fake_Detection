@@ -1,8 +1,9 @@
-### Paper buat proposal nanti
+## Paper buat proposal nanti
 
-[1] [A Benchmark of Facial Recognition Pipelines and Co-Usability Performances of Modules](https://dergipark.org.tr/tr/download/article-file/3573195)
+[1] [A Benchmark of Facial Recognition Pipelines and Co-Usability Performances of Modules](https://dergipark.org.tr/tr/download/article-file/3573195)\
+Ini menjelaskan perbandingan facedetector seperti MTCNN, RetinaFace, OpenCV DNN, dan sebagainya. RetinaFace punya performa lebih bagus, jadi kita pakai ini.
 
-### Rangkuman mengenai performa Model Klasifikasi DeepFake dan Dataset
+## Rangkuman mengenai performa Model Klasifikasi DeepFake dan Dataset
 
 Ini rangkuman yang coba aku kumpulkan dari paper [[1]](#ref1). Hanya untuk catatan sementara saja, nanti dihapus. Intinya ini mencoba melakukan perbandingan berbagai macam teknik untuk mendeteksi DeepFake. Ada beberapa dataset yang di-highlight oleh paper tersebut, aku akan mencoba kasih link jika datasetnya publik.\
 Dataset yang dipakai dalam riset DeepFake:
@@ -34,7 +35,7 @@ Coba cek 3 akurasi tertinggi:
 
 Mungkin Benchmark ini juga bisa membantu [[3]](#ref3).
 
-# Reference Paper
+### Reference Paper
 
 <a id="ref1"/>
 
@@ -50,7 +51,7 @@ Mungkin Benchmark ini juga bisa membantu [[3]](#ref3).
 
 ---
 
-### Insight dari paper " DeepFake Video Detection Using Machine Learning" by Dumbre et al. (link paper di googlesheet grup)
+## Insight dari paper " DeepFake Video Detection Using Machine Learning" by Dumbre et al. (link paper di googlesheet grup)
 
 Konsep yang dipakai disini menarik, (mungkin bisa kita coba adopsi untuk purpose metode baru)
 
