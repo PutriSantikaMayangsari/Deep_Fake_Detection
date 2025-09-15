@@ -1,3 +1,9 @@
+### Paper buat proposal nanti
+
+[1] [A Benchmark of Facial Recognition Pipelines and Co-Usability Performances of Modules](https://dergipark.org.tr/tr/download/article-file/3573195)
+
+### Rangkuman mengenai performa Model Klasifikasi DeepFake dan Dataset
+
 Ini rangkuman yang coba aku kumpulkan dari paper [[1]](#ref1). Hanya untuk catatan sementara saja, nanti dihapus. Intinya ini mencoba melakukan perbandingan berbagai macam teknik untuk mendeteksi DeepFake. Ada beberapa dataset yang di-highlight oleh paper tersebut, aku akan mencoba kasih link jika datasetnya publik.\
 Dataset yang dipakai dalam riset DeepFake:
 
