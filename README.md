@@ -87,3 +87,10 @@ Metric Score:
 - F1-Score 93.0%
 - AUC-ROC 0.96
 - Average Confidence 92%
+
+
+## Note
+download dataset
+
+curl -L -o ./datasets/ff-c23.zip\
+  https://www.kaggle.com/api/v1/datasets/download/xdxd003/ff-c23
