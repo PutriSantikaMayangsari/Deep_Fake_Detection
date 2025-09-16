@@ -6,6 +6,9 @@ Ini menjelaskan perbandingan facedetector seperti MTCNN, RetinaFace, OpenCV DNN,
 [2] [Quick Classification of Xception And Resnet-50 Models on Deepfake Video Using Local Binary Pattern](https://ieeexplore.ieee.org/document/9742852)\
 Di sini aku nyoba 2 implementasi face detektor ([MTCNN](https://github.com/PutriSantikaMayangsari/Deep_Fake_Detection/blob/main/MTCNN_LBP.ipynb) dan RetinaFace), ternyata hasilnya sama bagusnya. Jadi sepertinya aku pikir mending pake MTCNN aja, karena kebanyakan paper pake itu.
 
+[3] [Celeb-DF: A Large-scale Challenging Dataset for DeepFake Forensics](https://arxiv.org/pdf/1909.12962)\
+Paper ini menjelaskan dataset lain yang begitu mudah dibedakan antara fake dengan asli. Paper ini menawarkan dataset Celeb-DF yang lebih sulit untuk dibedakan. Nanti seterusnya kita pake ini saja.
+
 ## Rangkuman mengenai performa Model Klasifikasi DeepFake dan Dataset
 
 Ini rangkuman yang coba aku kumpulkan dari paper [[1]](#ref1). Hanya untuk catatan sementara saja, nanti dihapus. Intinya ini mencoba melakukan perbandingan berbagai macam teknik untuk mendeteksi DeepFake. Ada beberapa dataset yang di-highlight oleh paper tersebut, aku akan mencoba kasih link jika datasetnya publik.\
