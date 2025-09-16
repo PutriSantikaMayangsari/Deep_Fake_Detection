@@ -20,7 +20,8 @@ Dataset yang dipakai dalam riset DeepFake:
 4. DFDC Dataset [Original](https://ai.meta.com/datasets/dfdc/), [Varsi Kaggle](https://www.kaggle.com/competitions/deepfake-detection-challenge/data)
 5. UADFV [Kaggle](https://www.kaggle.com/datasets/adityakeshri9234/uadfv-dataset)
 6. Celeb DF (v2) [Kaggle](https://www.kaggle.com/datasets/reubensuju/celeb-df-v2)
-7. Wild Deep Fake [Kaggle](https://www.kaggle.com/datasets/maysuni/wild-deepfake)
+7. Celeb DF (v1) [Drive](https://drive.google.com/open?id=10NGF38RgF8FZneKOuCOdRIsPzpC7_WDd)
+8. Wild Deep Fake [Kaggle](https://www.kaggle.com/datasets/maysuni/wild-deepfake)
 
 ### Model
 Kalian bisa load model hasil dari training di atas, [Link](https://drive.google.com/file/d/1OdpPbkIf0EJCV3_EOHbH6V3Y0WtdagIW/view?usp=sharing), kemudian lanjut training pake data baru yang lebih susah. Aku menyarankan pakai Celeb DF (v2) atau DFDC. Sepertinya FaceForensics++ terlalu gampang.
