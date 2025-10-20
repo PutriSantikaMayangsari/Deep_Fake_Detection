@@ -1,96 +1,78 @@
-## Paper buat proposal nanti
+# Pendahuluan
 
-[1] [A Benchmark of Facial Recognition Pipelines and Co-Usability Performances of Modules](https://dergipark.org.tr/tr/download/article-file/3573195)\
-Ini menjelaskan perbandingan facedetector seperti MTCNN, RetinaFace, OpenCV DNN, dan sebagainya. RetinaFace dan MTCNN punya performa bagus, jadi kita pakai antara keduanya (paper kebanyakan pakai MTCNN, tapi kalau dilihat dari paper itu, MTCNN sama RetinaFace performanya beda tipis).
+Berbagai macam metode klasifikasi video *DeepFake* dengan video asli telah di-implementasikan ke berbagai macam dataset. Kami mencoba merumuskan metode klasifikasi video *DeepFake* dan asli yang lebih efisien tanpa mengorbankan performa.
 
-[2] [Quick Classification of Xception And Resnet-50 Models on Deepfake Video Using Local Binary Pattern](https://ieeexplore.ieee.org/document/9742852)\
-Di sini aku nyoba 2 implementasi face detektor ([MTCNN](https://github.com/PutriSantikaMayangsari/Deep_Fake_Detection/blob/main/MTCNN_LBP.ipynb) dan RetinaFace), ternyata hasilnya sama bagusnya. Jadi sepertinya aku pikir mending pake MTCNN aja, karena kebanyakan paper pake itu.
+# Landasan Teori
 
-[3] [Celeb-DF: A Large-scale Challenging Dataset for DeepFake Forensics](https://arxiv.org/pdf/1909.12962)\
-Paper ini menjelaskan dataset lain yang begitu mudah dibedakan antara fake dengan asli. Paper ini menawarkan dataset Celeb-DF yang lebih sulit untuk dibedakan. Nanti seterusnya kita pake ini saja.
+Kami menggunakan *Local Binary Pattern* (LBP) untuk meringkankan kinerja CNN karena LBP sudah melakukan ekstraksi fitur di langkah *prepocessing*, sehingga CNN hanya tinggal fokus pada fitur yang *high level*. Spatiotemporal Attention kami pakai untuk meningkatkan pengamatan model pada fitur-fitur yang telah terekstrak. Conv-LSTM meningkatkan performa model dalam memahami pola dari frame 1 ke frame selanjutnya.
 
-## Rangkuman mengenai performa Model Klasifikasi DeepFake dan Dataset
+# Metodologi Riset
 
-Ini rangkuman yang coba aku kumpulkan dari paper [[1]](#ref1). Hanya untuk catatan sementara saja, nanti dihapus. Intinya ini mencoba melakukan perbandingan berbagai macam teknik untuk mendeteksi DeepFake. Ada beberapa dataset yang di-highlight oleh paper tersebut, aku akan mencoba kasih link jika datasetnya publik.\
-Dataset yang dipakai dalam riset DeepFake:
+## Dataset
 
-1. DeepFaceLab Dataset (Dalam Paper [[2]](#ref2), DeepFaceLab pakai berbagai macam dataset. Ya dataset yang ada di bawah ini)
-2. CelebA Dataset [Link](https://mmlab.ie.cuhk.edu.hk/projects/CelebA.html)
-3. FaceForensics++ [Original perlu izin dulu](https://github.com/ondyari/FaceForensics), [Versi Kaggle](https://www.kaggle.com/datasets/xdxd003/ff-c23)
-4. DFDC Dataset [Original](https://ai.meta.com/datasets/dfdc/), [Varsi Kaggle](https://www.kaggle.com/competitions/deepfake-detection-challenge/data)
-5. UADFV [Kaggle](https://www.kaggle.com/datasets/adityakeshri9234/uadfv-dataset)
-6. Celeb DF (v2) [Kaggle](https://www.kaggle.com/datasets/reubensuju/celeb-df-v2)
-7. Wild Deep Fake [Kaggle](https://www.kaggle.com/datasets/maysuni/wild-deepfake)
+Berikut beberapa data yang dipakai:
+1. FaceForensics++ [Original perlu izin dulu](https://github.com/ondyari/FaceForensics), [Versi Kaggle](https://www.kaggle.com/datasets/xdxd003/ff-c23)
+2. DFDC Dataset [Original](https://ai.meta.com/datasets/dfdc/), [Varsi Kaggle](https://www.kaggle.com/competitions/deepfake-detection-challenge/data)
+3. UADFV [Kaggle](https://www.kaggle.com/datasets/adityakeshri9234/uadfv-dataset)
+4. Celeb DF (v2) [Kaggle](https://www.kaggle.com/datasets/reubensuju/celeb-df-v2)
 
-### Model
-Kalian bisa load model hasil dari training di atas, [Link](https://drive.google.com/file/d/1OdpPbkIf0EJCV3_EOHbH6V3Y0WtdagIW/view?usp=sharing), kemudian lanjut training pake data baru yang lebih susah. Aku menyarankan pakai Celeb DF (v2) atau DFDC. Sepertinya FaceForensics++ terlalu gampang.
+Download FF++:
+curl -L -o ./datasets/ff-c23.zip\
+  https://www.kaggle.com/api/v1/datasets/download/xdxd003/ff-c23
 
-Perbandingan Metode:
-| Study | Features | Classification Methods | Databases | Best Performance |
-|---------------------------------|----------------------------|-------------------------|--------------------------------------------------------------------------------|--------------------------|
-| Convolutional LSTM | Image Temporal Information | CNN + RNN | own | Acc. ≈ 97.1 |
-| XceptionNet | Image-related Steganalysis | CNN | FF++ (DeepFake, LQ)<br>FF++ (DeepFake, HQ)<br>FF++ (DeepFake, RAW)<br>Celeb-DF | Acc. ≈ 94.0%<br>Acc. ≈ 98.0%<br>Acc. ≈ 100.0%<br>Acc. ≈ 65.5% |
-| MesoNet | Mesoscopic Level | CNN | FF++ (DeepFake, LQ)<br>FF++ (DeepFake, HQ)<br>FF++ (DeepFake, RAW)<br>Celeb-DF | Acc. ≈ 90.0%<br>Acc. ≈ 94.4%<br>Acc. ≈ 98.06%<br>Acc. ≈ 54.8% |
-| Capsule | Image-related | Capsule Network | DeepFakeTIMIT (LQ)<br>DeepFakeTIMIT (HQ)<br>FF++ (DeepFake)<br>Celeb-DF | AUC ≈ 78.4%<br>AUC ≈ 74.4%<br>AUC ≈ 92.17%<br>AUC ≈ 57.5% |
-| Face Warping Artifacts | Image Warping Artifacts | CNN | UADFV<br>DeepFakeTIMIT (LQ)<br>DeepFakeTIMIT (HQ) | AUC ≈ 97.4%<br>AUC ≈ 99.9%<br>AUC ≈ 93.2% |
-| Two Stream | Image related Stageanalysis| CNN, SVM | UADFV<br>DeepFakeTIMIT (LQ)<br>DeepFakeTIMIT (HQ) | AUC ≈ 85.1%<br>AUC ≈ 83.5%<br>AUC ≈ 73.5% |
-| Recurrent Convolutional Network | Image+Temporal Information | CNN + RNN | FF++ (DeepFake, LQ) | Acc. ≈ 96.9% |
-| Visual Artifacts | Visual Artifacts | Logistic Regression, MLP| own | AUC ≈ 85.1% |
-| Maachine Learning | Spatial features + Temporal Inconsistency | ResNeXt50 + LSTM| Youtube, FaceForensic++, Kaggle | Acc 93.4% Precision 91.8% Recall 94.2% F1-Score 93.0% AUC-ROC 0.96 Average Confidence 92% |
+## Algoritma
 
-Coba cek 3 akurasi tertinggi:
+### Preprocessing
 
-1. XceptionNet: FF++(DeepFake,RAW), 100%, [Paper XceptionNet](https://arxiv.org/pdf/1610.02357), [Paper](https://openaccess.thecvf.com/content_ICCV_2019/papers/Rossler_FaceForensics_Learning_to_Detect_Manipulated_Facial_Images_ICCV_2019_paper.pdf), [GitHub](https://github.com/ondyari/FaceForensics)
-2. Face Warping Artifacts: DeepFakeTIMIT(LQ), 99.9% [Paper](https://arxiv.org/pdf/1811.00656), [GitHub](https://github.com/yuezunli/CVPRW2019_Face_Artifacts)
-3. MesoNet: FF++(DeepFake,RAW), 98%, [Paper](https://hal.science/hal-01867298/file/afchar_WIFS_2018.pdf), [GitHub](https://github.com/DariusAf/MesoNet)
+Beberapa metode yang digunakan untuk *preprocessing*:
+1. MTCNN = Deteksi Wajah
+2. LBP = Ekstrak Tekstur
+3. Gaussian Filter = Mengurangi Noise
 
-Mungkin Benchmark ini juga bisa membantu [[3]](#ref3).
+### Feature Extraction
 
-### Reference Paper
+1. Xception
+2. Spatiotemporal Attention
+3. Conv-LSTM
+
+# Daftar Pustaka
 
 <a id="ref1"/>
 
-[1] [Comparative study of deep learning techniques for DeepFake video detection](https://www.sciencedirect.com/science/article/pii/S2405959524001218?via%3Dihub)
+[1] [A. Arini, Rizal Broer Bahaweres, and Javid Al Haq, “Quick Classification of Xception And Resnet-50 Models on Deepfake Video Using Local Binary Pattern,” Jan. 2022, doi: https://doi.org/10.1109/ismode53584.2022.9742852](https://ieeexplore.ieee.org/document/9742852)
 
 <a id="ref2"/>
 
-[2] [DeepFaceLab: Integrated, flexible and extensible face-swapping framework](https://arxiv.org/pdf/2005.05535)
+[2] [A. Das, K.S Angel Viji, and L. Sebastian, “A Survey on Deepfake Video Detection Techniques Using Deep Learning,” Jul. 2022, doi: https://doi.org/10.1109/icngis54955.2022.10079802.](https://ieeexplore.ieee.org/document/10079802)
 
-<a if="ref3"/>
+<a id="ref3"/>
 
-[3] [FaceForensics Benchmark](https://kaldir.vc.in.tum.de/faceforensics_benchmark/)
+[3] [A. K. Jha, A. K. Yadav, A. K. Dubey, A. Kumar, and A. Sharma, “Deep Learning Based Deepfake Video Detection System,” 2025 3rd International Conference on Disruptive Technologies (ICDT), pp. 408–412, Mar. 2025, doi: https://doi.org/10.1109/icdt63985.2025.10986738.](https://ieeexplore.ieee.org/document/10986738)
 
----
+<a id="ref4"/>
 
-## Insight dari paper " DeepFake Video Detection Using Machine Learning" by Dumbre et al. (link paper di googlesheet grup)
+[4] [I. Petrov Freelancer et al., “DeepFaceLab: Integrated, flexible and extensible face-swapping framework.” Available: https://arxiv.org/pdf/2005.05535](https://arxiv.org/pdf/2005.05535)
 
-Konsep yang dipakai disini menarik, (mungkin bisa kita coba adopsi untuk purpose metode baru)
+<a id="ref5"/>
 
-Ide dasarnya adalah bagaimana mengekstrak fitur-fitur spasial penting (termasuk inkonsistensi dalam frame video --> indikasi deepfake) kemudian mengevaluasi sequence atau frame yang tidak konsisten.
+[5] [N. M. Emara and Mazen Nabil Elagamy, “DeepStream-X: A Two-Stream Deepfake Detection Framework using Spatiotemporal and Frequency Features,” pp. 290–296, Dec. 2024, doi: https://doi.org/10.1109/iccta64612.2024.10974904.](https://ieeexplore.ieee.org/document/10974904)
 
-- ide: fitur spasial + temporal inconsistency
-- Metode yang dipakai adalah gabungan CNN dan LSTM
-- Ekstraksi fitur dengan ResNeXt50 kemudian evaluasi inkonsistensi dengan LSTM
-- Preprocessing Multi-task Cascaded Convolutional Network(MTCNN)
+<a id="ref6">
 
-Dataset yang dipakai:
+[6] [R. Khan et al., “Comparative study of deep learning techniques for DeepFake video detection,” ICT Express, vol. 10, no. 6, Oct. 2024, doi: https://doi.org/10.1016/j.icte.2024.09.018.](https://www.sciencedirect.com/science/article/pii/S2405959524001218?via%3Dihub)
 
-- YouTube (for authentic content)
-- FaceForensics++
-- Kaggle's DeepFake Detection Chalenge dataset
+<a id="ref7">
+  
+[7] [S. Graphics, “Benchmark Results - FaceForensics Benchmark,” kaldir.vc.in.tum.de. https://kaldir.vc.in.tum.de/faceforensics_benchmark/](https://kaldir.vc.in.tum.de/faceforensics_benchmark/)
 
-Metric Score:
+<a id="ref8">
+  
+[8] [S. Serengil and A. Özpınar, “A Benchmark of Facial Recognition Pipelines and Co-Usability Performances of Modules,” Bilişim Teknolojileri Dergisi, vol. 17, no. 2, pp. 95–107, Apr. 2024, doi: https://doi.org/10.17671/gazibtd.1399077.](https://dergipark.org.tr/tr/download/article-file/3573195)
 
-- Accuracy 93.4%
-- Precision 91.8%
-- Recall 94.2%
-- F1-Score 93.0%
-- AUC-ROC 0.96
-- Average Confidence 92%
+<a id="ref9">
+  
+[9] [W. M. Wubet*, “The deepfake challenges and deepfake video detection,” International Journal of Innovative Technology and Exploring Engineering, vol. 9, no. 6, pp. 789–796, Apr. 2020. doi:10.35940/ijitee.e2779.049620 ](https://www.ijitee.org/portfolio-item/E2779039520/)
 
-
-## Note
-download dataset
-
-curl -L -o ./datasets/ff-c23.zip\
-  https://www.kaggle.com/api/v1/datasets/download/xdxd003/ff-c23
+<a id="ref10">
+  
+[10] [Y. Li, X. Yang, P. Sun, H. Qi, and S. Lyu, “Celeb-DF: A Large-scale Challenging Dataset for DeepFake Forensics,” arxiv.org, Sep. 2019, Available: https://arxiv.org/abs/1909.12962](https://arxiv.org/pdf/1909.12962)
