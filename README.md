@@ -10,7 +10,7 @@ Kami menggunakan *Local Binary Pattern* (LBP) untuk meringkankan kinerja CNN kar
 
 ## Dataset
 
-Berikut beberapa data yang dipakai:
+Berikut beberapa data yang bisa dipakai:
 1. FaceForensics++ [Original perlu izin dulu](https://github.com/ondyari/FaceForensics), [Versi Kaggle](https://www.kaggle.com/datasets/xdxd003/ff-c23)
 2. DFDC Dataset [Original](https://ai.meta.com/datasets/dfdc/), [Varsi Kaggle](https://www.kaggle.com/competitions/deepfake-detection-challenge/data)
 3. UADFV [Kaggle](https://www.kaggle.com/datasets/adityakeshri9234/uadfv-dataset)
@@ -34,6 +34,20 @@ Beberapa metode yang digunakan untuk *preprocessing*:
 1. Xception
 2. Spatiotemporal Attention
 3. Conv-LSTM
+
+## Hasil
+
+### LBP + Spatiotemporal Attention ConvLSTM
+
+![](https://github.com/PutriSantikaMayangsari/Deep_Fake_Detection/blob/main/hasil/LBP%2BSpatioTemporal_ConvLSTM%20(CelebDF).png)
+
+![](https://github.com/PutriSantikaMayangsari/Deep_Fake_Detection/blob/main/hasil/cm%20-%20LBP%2BSpatioTemporal_ConvLSTM%20(CelebDF).png)
+
+### Spatiotemporal ConvLSTM
+
+![](https://github.com/PutriSantikaMayangsari/Deep_Fake_Detection/blob/main/hasil/SpatioTemporal_ConvLSTM%20(CelebDF).png)
+
+![](https://github.com/PutriSantikaMayangsari/Deep_Fake_Detection/blob/main/hasil/cm%20-%20SpatioTemporal_ConvLSTM%20(CelebDF).png)
 
 # Daftar Pustaka
 
